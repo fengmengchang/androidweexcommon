@@ -53,11 +53,11 @@ public class WeexMainActivity extends  FragmentActivity implements IWXRenderList
 	/**网络请求方式http or https*/
 	public static final String HTTP = "https";//https http
 	/**ip*/
-	public static final String IP = "raw.githubusercontent.com/fengmnegchang/yokaweex/master";//192.168.1.9:8080 192.168.1.15:8080 
-	//raw.githubusercontent.com/fengmnegchang/yokaweex/master
+	public static final String IP = "raw.githubusercontent.com/fengmnegchang/mmweex/master";//192.168.1.9:8080 192.168.1.15:8080 
+	//raw.githubusercontent.com/fengmnegchang/mmweex/master
 	/**桥接主入口*/
-	public static final String MAIN_JS = "/yoka/build/src/mainlist.js";//"dist/app.weex.js";
-	public static final String MAIN_WEB = "/index.html?page=./yoka/build/src/mainlist.js"; 
+	public static final String MAIN_JS = "/mm/build/src/mainlist.js";//"dist/app.weex.js";
+	public static final String MAIN_WEB = "/index.html?page=./mm/build/src/mainlist.js"; 
     WXSDKInstance mWXSDKInstance;
 	Map<String, Object> options = new HashMap<String, Object>();
 	int themetype=0;
