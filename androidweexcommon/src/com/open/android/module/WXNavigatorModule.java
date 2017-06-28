@@ -49,6 +49,7 @@ public class WXNavigatorModule extends WXModule {
 	private static final String INSTANCE_ID = "instanceId";
 	private static final String TAG = "Navigator";
 	private static final String WEEX = "com.taobao.android.intent.category.WEEX";
+	private static final String WEEX_MM = "com.common.android.mm.intent.category.WEEX";
 	private static final String URL = "url";
 
 	@JSMethod(uiThread = true)
@@ -121,7 +122,8 @@ public class WXNavigatorModule extends WXModule {
 						builder.scheme("http");
 
 					Intent intent = new Intent("android.intent.action.VIEW", builder.build());
-					intent.addCategory("com.taobao.android.intent.category.WEEX");
+//					intent.addCategory(WEEX);
+					intent.addCategory(WEEX_MM);
 					intent.putExtra("jsonInitData", jsonInitData);
 					intent.putExtra("options", options);
 					this.mWXSDKInstance.getContext().startActivity(intent);

@@ -51,9 +51,9 @@ import com.taobao.weex.common.WXRenderStrategy;
 public class WeexMainActivity extends  FragmentActivity implements IWXRenderListener {
 	/**weex**/
 	/**网络请求方式http or https*/
-	public static final String HTTP = "https";//https http
+	public static final String HTTP = "http";//https http
 	/**ip*/
-	public static final String IP = "raw.githubusercontent.com/fengmnegchang/mmweex/master";//192.168.1.9:8080 192.168.1.15:8080 
+	public static final String IP = "192.168.1.15:8080";//192.168.1.9:8080 192.168.1.15:8080 
 	//raw.githubusercontent.com/fengmnegchang/mmweex/master
 	/**桥接主入口*/
 	public static final String MAIN_JS = "/mm/build/src/mainlist.js";//"dist/app.weex.js";
