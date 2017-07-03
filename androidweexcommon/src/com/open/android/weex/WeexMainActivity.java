@@ -29,10 +29,12 @@ import java.util.Map;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
+import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewCompat;
 import android.util.Log;
@@ -51,19 +53,24 @@ import com.taobao.weex.common.WXRenderStrategy;
 public class WeexMainActivity extends  FragmentActivity implements IWXRenderListener {
 	/**weex**/
 	/**网络请求方式http or https*/
-	public static final String HTTP = "http";//https http
+//	public static final String HTTP = "http";//https http
 	/**ip*/
-	public static final String IP = "192.168.1.15:8080";//192.168.1.9:8080 192.168.1.15:8080 
+//	public static final String IP = "192.168.1.15:8080";
+	//192.168.1.9:8080 192.168.1.15:8080 
 	//raw.githubusercontent.com/fengmnegchang/mmweex/master
+	//raw.githubusercontent.com/fengmingxuan/vuemmjpg/master
 	/**桥接主入口*/
-	public static final String MAIN_JS = "/mm/build/src/mainlist.js";//"dist/app.weex.js";
-	public static final String MAIN_WEB = "/index.html?page=./mm/build/src/mainlist.js"; 
+	public String MAIN_JS = "http://192.168.1.15:8080/mzitu/build/src/mainlist.js";//"dist/app.weex.js";/mm/build/src/mainlist.js
+	public String MAIN_WEB = "/index.html?page=./mzitu/build/src/mainlist.js"; ///index.html?page=./mm/build/src/mainlist.js
     WXSDKInstance mWXSDKInstance;
 	Map<String, Object> options = new HashMap<String, Object>();
 	int themetype=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(getIntent().getStringExtra("URL")!=null){
+        	MAIN_JS = getIntent().getStringExtra("URL");
+        }
         mWXSDKInstance = new WXSDKInstance(this);
         mWXSDKInstance.registerRenderListener(this);
         /**
@@ -75,7 +82,7 @@ public class WeexMainActivity extends  FragmentActivity implements IWXRenderList
          * height =-1 默认全屏，可以自己定制。
          */
         options.put("skinType", themetype);
-        mWXSDKInstance.renderByUrl("MyApplication",HTTP+"://"+IP+MAIN_JS,options, null, -1, -1, WXRenderStrategy.APPEND_ASYNC);
+        mWXSDKInstance.renderByUrl("MyApplication", MAIN_JS,options, null, -1, -1, WXRenderStrategy.APPEND_ASYNC);
       
 //        mWXSDKInstance.renderByUrl("MyApplication","http://192.168.1.15:8080/dist/weexbar/tabbar.js",null, null, -1, -1, WXRenderStrategy.APPEND_ASYNC);
 //        mWXSDKInstance.render("MyApplication", WXFileUtils.loadAsset("index.js", this), null, null, -1, -1, WXRenderStrategy.APPEND_ASYNC);
@@ -234,5 +241,12 @@ public class WeexMainActivity extends  FragmentActivity implements IWXRenderList
         if (mWXSDKInstance != null) {
             mWXSDKInstance.onActivityDestroy();
         }
+    }
+    
+    public static void startWeexMainActivity(Context context,String url){
+    	Intent intent = new Intent();
+    	intent.setClass(context, WeexMainActivity.class);
+    	intent.putExtra("URL", url);
+    	context.startActivity(intent);
     }
 }
