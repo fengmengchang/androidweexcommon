@@ -116,7 +116,7 @@ public class WeexMainActivity extends  FragmentActivity implements IWXRenderList
     	            File imageFile = new File(file.getAbsolutePath(),  URLEncoder.encode(MAIN_JS,"UTF-8")+".js");
     	            if(imageFile.exists()){
     	            	String originalData = readInputStream(new FileInputStream(imageFile), "UTF-8",null);
-    	                mWXSDKInstance.render("MyApplication", originalData, null, null, -1, -1, WXRenderStrategy.APPEND_ASYNC);
+    	                mWXSDKInstance.render("MyApplication", originalData, options, null, -1, -1, WXRenderStrategy.APPEND_ASYNC);
     	            }
     			} 
     		} catch (Exception e2) {
