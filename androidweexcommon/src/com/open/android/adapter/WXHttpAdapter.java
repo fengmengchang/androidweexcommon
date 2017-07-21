@@ -13,14 +13,20 @@ package com.open.android.adapter;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.Set;
 
+import android.graphics.Bitmap;
+import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -73,13 +79,33 @@ public class WXHttpAdapter implements IWXHttpAdapter {
 					response.statusCode = String.valueOf(responseCode);
 					if (responseCode == 200 || responseCode == 202) {
 						response.originalData = readInputStream(connection.getInputStream(), charsetName,listener).getBytes();
+						//存储js文件
+						try {  
+							if(request.url.endsWith(".js")){
+								String sdcard = Environment.getExternalStorageDirectory().toString();  
+					            File file = new File(sdcard + "/com.open.mmjpg/js/");  
+					            if (!file.exists()) {  
+					                file.mkdirs();  
+					            }  
+					            File imageFile = new File(file.getAbsolutePath(),  URLEncoder.encode(request.url,"UTF-8")+".js");  
+					            imageFile.deleteOnExit();
+					            imageFile.createNewFile();
+					            FileOutputStream outStream = null;  
+					            outStream = new FileOutputStream(imageFile);  
+					            outStream.write(response.originalData);
+					            outStream.flush();  
+					            outStream.close();  
+							}
+				        } catch (Exception e) {  
+				            e.printStackTrace();  
+				        }  
 					} else {
 						response.errorMsg = readInputStream(connection.getErrorStream(), charsetName,listener);
 					}
 					if (listener != null) {
 						listener.onHttpFinish(response);
 					}
-				} catch (IOException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 					response.errorCode = "-1";
 					response.errorMsg = e.getMessage();
