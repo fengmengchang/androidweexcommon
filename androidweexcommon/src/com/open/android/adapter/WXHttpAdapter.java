@@ -83,10 +83,14 @@ public class WXHttpAdapter implements IWXHttpAdapter {
 						try {  
 							if(request.url.endsWith(".js")){
 								String sdcard = Environment.getExternalStorageDirectory().toString();  
-					            File file = new File(sdcard + "/com.open.mmjpg/js/");  
+					            File file = new File(sdcard + "/com.open.mmjpg/");  
 					            if (!file.exists()) {  
 					                file.mkdirs();  
 					            }  
+					            file = new File(sdcard + "/com.open.mmjpg/js/"); 
+					            if (!file.exists()) {  
+						             file.mkdirs();  
+						        }  
 					            File imageFile = new File(file.getAbsolutePath(),  URLEncoder.encode(request.url,"UTF-8")+".js");  
 					            imageFile.deleteOnExit();
 					            imageFile.createNewFile();

@@ -105,10 +105,14 @@ public class WeexMainActivity extends  FragmentActivity implements IWXRenderList
     			//读取缓存
     			if(MAIN_JS.endsWith(".js")){
     				String sdcard = Environment.getExternalStorageDirectory().toString();  
-    	            File file = new File(sdcard + "/com.open.mmjpg/js/");  
-    	            if (!file.exists()) {  
-    	                file.mkdirs();  
-    	            }  
+    	            File file = new File(sdcard + "/com.open.mmjpg/");  
+		            if (!file.exists()) {  
+		                file.mkdirs();  
+		            }  
+		            file = new File(sdcard + "/com.open.mmjpg/js/"); 
+		            if (!file.exists()) {  
+			             file.mkdirs();  
+			        }  
     	            File imageFile = new File(file.getAbsolutePath(),  URLEncoder.encode(MAIN_JS,"UTF-8")+".js");
     	            if(imageFile.exists()){
     	            	String originalData = readInputStream(new FileInputStream(imageFile), "UTF-8",null);
