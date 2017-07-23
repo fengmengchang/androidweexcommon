@@ -34,6 +34,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.taobao.weex.WXSDKManager;
 import com.taobao.weex.adapter.IWXHttpAdapter;
+import com.taobao.weex.common.WXRenderStrategy;
 import com.taobao.weex.common.WXRequest;
 import com.taobao.weex.common.WXResponse;
 import com.taobao.weex.utils.WXLogUtils;
@@ -111,11 +112,38 @@ public class WXHttpAdapter implements IWXHttpAdapter {
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
-					response.errorCode = "-1";
-					response.errorMsg = e.getMessage();
-					if (listener != null) {
-						listener.onHttpFinish(response);
+					Log.e("WXHttpAdapter", "url==="+request.url);
+					try {
+						if(request.url.endsWith(".js")){
+		    				String sdcard = Environment.getExternalStorageDirectory().toString();  
+		    	            File file = new File(sdcard + "/com.open.mmjpg/");  
+				            if (!file.exists()) {  
+				                file.mkdirs();  
+				            }  
+				            file = new File(sdcard + "/com.open.mmjpg/js/"); 
+				            if (!file.exists()) {  
+					             file.mkdirs();  
+					        }  
+		    	            File imageFile = new File(file.getAbsolutePath(),  URLEncoder.encode(request.url,"UTF-8")+".js");
+		    	            if(imageFile.exists()){
+		    	            	response.originalData = readInputStream(new FileInputStream(imageFile), "UTF-8",listener).getBytes();
+		    	                
+		    	            }
+		    	            response.errorCode = "200";
+							response.errorMsg = e.getMessage();
+							if (listener != null) {
+								listener.onHttpFinish(response);
+							}
+		    			} 
+					} catch (Exception e2) {
+						response.errorCode = "-1";
+						response.errorMsg = e.getMessage();
+						if (listener != null) {
+							listener.onHttpFinish(response);
+						}
 					}
+					
+					
 				}
 			}
 		}).start();
