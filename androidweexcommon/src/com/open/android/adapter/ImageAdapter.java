@@ -1,13 +1,17 @@
 package com.open.android.adapter;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
+import java.net.HttpURLConnection;
 
+import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.open.android.weex.R;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.UrlConnectionDownloader;
 import com.taobao.weex.adapter.IWXImgLoaderAdapter;
 import com.taobao.weex.common.WXImageStrategy;
 import com.taobao.weex.dom.WXImageQuality;
@@ -23,6 +27,11 @@ import com.taobao.weex.dom.WXImageQuality;
  * @description: ****************************************************************************************************************************************************************************
  */
 public class ImageAdapter implements IWXImgLoaderAdapter {
+	private String referer;
+	
+	public ImageAdapter(String referer){
+		this.referer = referer;
+	}
 
     @Override
     public void setImage(String url, ImageView view, WXImageQuality quality, WXImageStrategy strategy) {
@@ -34,7 +43,13 @@ public class ImageAdapter implements IWXImgLoaderAdapter {
                 return;
             }
         }
-        Picasso.with(view.getContext()).load(url).into(view);//获取网络图片
+        new Picasso.Builder(view.getContext())
+        .downloader(new RefererUrlConnectionDownloader(view.getContext(),referer))
+        .build()
+        .load(url)
+        .into(view);
+        
+//        Picasso.with(view.getContext()).load(url).into(view);//获取网络图片
     }
 
     /**
