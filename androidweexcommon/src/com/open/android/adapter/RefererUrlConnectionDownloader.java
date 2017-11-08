@@ -49,6 +49,9 @@ public class RefererUrlConnectionDownloader extends UrlConnectionDownloader{
 //    		connection.setRequestProperty("Referer", "http://m.mzitu.com/96554");
     		if(referer.contains("m.mzitu.com")){
     			connection.setRequestProperty("Referer", referer);
+    		}else if(referer.contains("http://m.mm131.com/")){
+    			connection.setRequestProperty("Referer", referer);
+    			connection.setRequestProperty("Host", "img1.mm131.me");
     		}
     	}
         //Referer:http://m.mzitu.com/96554
