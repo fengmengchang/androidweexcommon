@@ -74,8 +74,8 @@ public class WeexMainActivity extends  FragmentActivity implements IWXRenderList
 	//raw.githubusercontent.com/fengmnegchang/mmweex/master
 	//raw.githubusercontent.com/fengmingxuan/vuemmjpg/master
 	/**桥接主入口*/
- 	public String MAIN_JS = "https://raw.githubusercontent.com/fengmnegchang/mmweex/master/mm/build/src/mainlist.js";//"dist/app.weex.js";/mm/build/src/mainlist.js
-//	public String MAIN_JS = "https://raw.githubusercontent.com/fengmingxuan/vuemmjpg/master/meizitu/build/src/mmenu/mslideoutmenu2.js";//"dist/app.weex.js";/mm/build/src/mainlist.js
+// 	public String MAIN_JS = "https://raw.githubusercontent.com/fengmnegchang/mmweex/master/mm/build/src/mainlist.js";//"dist/app.weex.js";/mm/build/src/mainlist.js
+	public String MAIN_JS = "https://raw.githubusercontent.com/fengmingxuan/vuemmjpg/master/meizitu/build/src/mmenu/mslideoutmenu2.js";//"dist/app.weex.js";/mm/build/src/mainlist.js
 //	public String MAIN_JS = "http://192.168.1.7:8080/meitu4493/build/src/mainlist.js";
 	public String MAIN_WEB = "/index.html?page=./meizitu/build/src/mainlist.js"; ///index.html?page=./mm/build/src/mainlist.js
     WXSDKInstance mWXSDKInstance;

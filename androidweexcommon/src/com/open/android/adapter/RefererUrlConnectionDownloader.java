@@ -52,6 +52,10 @@ public class RefererUrlConnectionDownloader extends UrlConnectionDownloader{
     		}else if(referer.contains("http://m.mm131.com/")){
     			connection.setRequestProperty("Referer", referer);
     			connection.setRequestProperty("Host", "img1.mm131.me");
+    		}else if(referer.contains("img.mmjpg.com")){
+    			connection.setRequestProperty("Referer", "http://m.mmjpg.com/mm/1033/1");
+    			connection.setRequestProperty("Host", "img.mmjpg.com");
+    			connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36");
     		}
     	}
         //Referer:http://m.mzitu.com/96554
