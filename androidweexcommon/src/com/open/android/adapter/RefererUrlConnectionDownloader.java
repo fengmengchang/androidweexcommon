@@ -48,15 +48,21 @@ public class RefererUrlConnectionDownloader extends UrlConnectionDownloader{
     	if(referer!=null && referer.length()>0){
 //    		connection.setRequestProperty("Referer", "http://m.mzitu.com/96554");
     		if(referer.contains("m.mzitu.com")){
-    			connection.setRequestProperty("Referer", referer);
+    			if(uri.toString().contains("img.mmjpg.com")){
+        			connection.setRequestProperty("Referer", "http://m.mmjpg.com/mm/1033/1");
+        			connection.setRequestProperty("Host", "img.mmjpg.com");
+        			connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36");
+        		}else if(uri.toString().contains("img.1985t.com")){
+//        			connection.setRequestProperty("Referer", "http://m.mmjpg.com/mm/1033/1");
+//        			connection.setRequestProperty("Host", "img.mmjpg.com");
+        			connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36");
+        		}else{
+        			connection.setRequestProperty("Referer", referer);
+        		}
     		}else if(referer.contains("http://m.mm131.com/")){
     			connection.setRequestProperty("Referer", referer);
     			connection.setRequestProperty("Host", "img1.mm131.me");
-    		}else if(referer.contains("img.mmjpg.com")){
-    			connection.setRequestProperty("Referer", "http://m.mmjpg.com/mm/1033/1");
-    			connection.setRequestProperty("Host", "img.mmjpg.com");
-    			connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36");
-    		}
+    		}  
     	}
         //Referer:http://m.mzitu.com/96554
         //User-Agent:Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Mobile Safari/537.36
